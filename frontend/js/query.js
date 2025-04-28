@@ -164,7 +164,7 @@ defaultToolbar: [
         };
 
         table.reload('resultTable', {
-            url: 'http://localhost:5242/api/aftercare_query/by-range',
+            url: 'https://shamrock-aftercare-system-c0cmahexfkena5cj.westus2-01.azurewebsites.net/api/aftercare_query/by-range',
             where: queryConditions,
             toolbar: true,
             defaultToolbar: [
@@ -277,7 +277,7 @@ defaultToolbar: [
         queryConditions.sortOrder = obj.type || 'asc'; // asc or desc
 
         table.reload('resultTable', {
-            url: 'http://localhost:5242/api/aftercare_query/by-range',
+            url: 'https://shamrock-aftercare-system-c0cmahexfkena5cj.westus2-01.azurewebsites.net/api/aftercare_query/by-range',
             where: queryConditions,
             toolbar: true,
             defaultToolbar: [

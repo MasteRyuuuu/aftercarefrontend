@@ -12,7 +12,7 @@ function submitFixedRule() {
         effectiveTo: form.effectiveTo.value || null
     };
 
-    axios.post('http://localhost:5242/api/aftercare_rules', data)
+    axios.post('https://shamrock-aftercare-system-c0cmahexfkena5cj.westus2-01.azurewebsites.net/api/aftercare_rules', data)
         .then(res => {
             layer.msg('Fixed rule registered successfully');
             form.reset();
@@ -30,7 +30,7 @@ function submitOneTime() {
         aftercareDate: form.aftercareDate.value
     };
 
-    axios.post('http://localhost:5242/api/aftercare_onetime', data)
+    axios.post('https://shamrock-aftercare-system-c0cmahexfkena5cj.westus2-01.azurewebsites.net/api/aftercare_onetime', data)
         .then(res => {
             layer.msg('One-time aftercare registered successfully');
             form.reset();

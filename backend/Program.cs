@@ -20,7 +20,7 @@ builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // ✅ 使用 Swagger
-if (app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

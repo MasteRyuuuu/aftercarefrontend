@@ -82,3 +82,10 @@ F:\preschool_aftercare\backend\bin\Release\net8.0\publish\appsettings.Developmen
 F:\preschool_aftercare\backend\bin\Release\net8.0\publish\appsettings.json
 F:\preschool_aftercare\backend\bin\Release\net8.0\publish\backend.deps.json
 F:\preschool_aftercare\backend\bin\Release\net8.0\publish\backend.runtimeconfig.json
+F:\preschool_aftercare\backend\bin\Release\net8.0\publish\publish\web.config
+F:\preschool_aftercare\backend\bin\Release\net8.0\publish\publish\appsettings.Development.json
+F:\preschool_aftercare\backend\bin\Release\net8.0\publish\publish\appsettings.json
+F:\preschool_aftercare\backend\bin\Release\net8.0\publish\publish\backend.deps.json
+F:\preschool_aftercare\backend\bin\Release\net8.0\publish\publish\backend.runtimeconfig.json
+F:\preschool_aftercare\backend\bin\Release\net8.0\backend.staticwebassets.runtime.json
+F:\preschool_aftercare\backend\obj\Release\net8.0\backend.sourcelink.json

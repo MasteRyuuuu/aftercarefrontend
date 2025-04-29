@@ -1,0 +1,73 @@
+{
+  "Files": [
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\images\\logo.png",
+      "PackagePath": "staticwebassets\\images\\logo.png"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\js\\query.js",
+      "PackagePath": "staticwebassets\\js\\query.js"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\js\\register.js",
+      "PackagePath": "staticwebassets\\js\\register.js"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\css\\layui.css",
+      "PackagePath": "staticwebassets\\layui\\css\\layui.css"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\font\\iconfont.eot",
+      "PackagePath": "staticwebassets\\layui\\font\\iconfont.eot"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\font\\iconfont.svg",
+      "PackagePath": "staticwebassets\\layui\\font\\iconfont.svg"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\font\\iconfont.ttf",
+      "PackagePath": "staticwebassets\\layui\\font\\iconfont.ttf"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\font\\iconfont.woff",
+      "PackagePath": "staticwebassets\\layui\\font\\iconfont.woff"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\font\\iconfont.woff2",
+      "PackagePath": "staticwebassets\\layui\\font\\iconfont.woff2"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\layui\\layui.js",
+      "PackagePath": "staticwebassets\\layui\\layui.js"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\lib\\xlsx.full.min.js",
+      "PackagePath": "staticwebassets\\lib\\xlsx.full.min.js"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\page\\query.html",
+      "PackagePath": "staticwebassets\\page\\query.html"
+    },
+    {
+      "Id": "F:\\preschool_aftercare\\backend\\wwwroot\\page\\register.html",
+      "PackagePath": "staticwebassets\\page\\register.html"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.build.backend.props",
+      "PackagePath": "build\\backend.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.backend.props",
+      "PackagePath": "buildMultiTargeting\\backend.props"
+    },
+    {
+      "Id": "obj\\Release\\net8.0\\staticwebassets\\msbuild.buildTransitive.backend.props",
+      "PackagePath": "buildTransitive\\backend.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

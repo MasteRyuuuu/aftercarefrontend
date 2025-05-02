@@ -109,19 +109,22 @@
 
             <div class="layui-form-item">
                 <label class="layui-form-label">Day of Week</label>
-                <div class="layui-input-block">
-                    <select name="dayOfWeek" required>
-                        
-                        <option value="1">Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        
-                    </select>
-                </div>
+  <div class="layui-input-block">
+    <input type="checkbox" name="dayOfWeek" value="0" title="Monday">
+    <input type="checkbox" name="dayOfWeek" value="1" title="Tuesday">
+    <input type="checkbox" name="dayOfWeek" value="2" title="Wednesday">
+    <input type="checkbox" name="dayOfWeek" value="3" title="Thursday">
+    <input type="checkbox" name="dayOfWeek" value="4" title="Friday">
+  </div>
             </div>
-
+            <div class="layui-form-item">
+                <label class="layui-form-label">Pick-up Time</label>
+                <div class="layui-input-block">
+                  <input type="radio" name="pickup_time_type" value="1" title="5:00 PM" checked>
+                  <input type="radio" name="pickup_time_type" value="2" title="5:30 PM">
+                </div>
+              </div>
+              
             <div class="layui-form-item">
                 <label class="layui-form-label">Effective From</label>
                 <div class="layui-input-block">
@@ -153,7 +156,14 @@
                     <input type="text" name="studentName" required placeholder="Enter student name" class="layui-input">
                 </div>
             </div>
-
+            <div class="layui-form-item">
+                <label class="layui-form-label">Pick-up Time</label>
+                <div class="layui-input-block">
+                  <input type="radio" name="pickup_time_type" value="1" title="5:00 PM" checked>
+                  <input type="radio" name="pickup_time_type" value="2" title="5:30 PM">
+                </div>
+              </div>
+              
             <div class="layui-form-item">
                 <label class="layui-form-label">Aftercare Date</label>
                 <div class="layui-input-block">

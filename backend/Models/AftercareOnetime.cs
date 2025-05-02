@@ -7,5 +7,6 @@ namespace backend.Models
         public DateTime AftercareDate { get; set; }
         public DateTime CreatedAt { get; set; }
         public int State { get; set; } = 1;  // 默认1有效
+        public int PickupTimeType { get; set; } = 1;
     }
 }

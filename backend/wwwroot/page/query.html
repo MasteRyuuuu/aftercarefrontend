@@ -92,6 +92,8 @@
 <!-- Custom JS -->
 <script src="../js/query.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
 <script src="../lib/xlsx.full.min.js"></script>
 <script>
     layui.use(function(){
@@ -108,6 +110,9 @@
     
       
     });
+    </script>
+    <script type="text/html" id="actionsToolbar">
+      <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">Delete</button>
     </script>
 </body>
 </html>

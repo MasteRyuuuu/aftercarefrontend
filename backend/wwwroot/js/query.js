@@ -6,10 +6,44 @@ layui.use(['table', 'form'], function () {
     form.render();
 
     let queryConditions = {}; // Global conditions
+// Listen to the delete button click
+table.on('tool(resultTable)', function(obj){
+  console.log('Button clicked', obj.event, obj.data);
+
+  const data = obj.data;
+  if(obj.event === 'delete'){
+      layer.confirm('Are you sure to delete this record?', function(index){
+        console.log('Confirmed delete', data);
+
+          let deleteUrl = '';
+          if (data.SourceType === 0) {
+              deleteUrl = `https://shamrock-aftercare-system-c0cmahexfkena5cj.westus2-01.azurewebsites.net/api/aftercare_rules/${data.SourceId}`;
+          } else if (data.SourceType === 1) {
+              deleteUrl = `https://shamrock-aftercare-system-c0cmahexfkena5cj.westus2-01.azurewebsites.net/api/aftercare_onetime/${data.SourceId}`;
+          } else {
+              layer.msg('Unknown SourceType');
+              return;
+          }
+
+          axios.delete(deleteUrl)
+          .then(function (response) {
+              layer.msg('Deleted successfully');
+              table.reload('resultTable');
+              layer.close(index);
+          })
+          .catch(function (error) {
+              console.error(error);
+              layer.msg('Error occurred during delete');
+          });
+      });
+  }
+});
+
 
     // Initialize empty table (no initial request)
     table.render({
         elem: '#resultTable',
+        id: 'resultTable',
         loading: false,
         method: 'post',
         contentType: 'application/json',
@@ -67,8 +101,10 @@ defaultToolbar: [
               const headerMap = {
                 StudentName: "Student Name",
                 TargetDate: "Date",
-                DayOfWeek: "Day of Week"
+                DayOfWeek: "Day of Week",
+                PickupTimeText: "Pick-up Time" // ✅ 新增字段
               };
+              
 
               const renamed = cleaned.map((row, rowIndex) => {
                 const newRow = {};
@@ -131,12 +167,13 @@ defaultToolbar: [
             };
         },
         cols: [[
-            {field: 'TargetDate', title: 'Date', sort: true, templet: function(d){
-                return d.TargetDate.split('T')[0];
-            }},
-            {field: 'DayOfWeek', title: 'Day of Week', sort: true},
-            {field: 'StudentName', title: 'Student Name', sort: true}
+          {field: 'TargetDate', title: 'Date', sort: true, templet: d => d.TargetDate.split('T')[0]},
+          {field: 'DayOfWeek', title: 'Day of Week', sort: true},
+          {field: 'StudentName', title: 'Student Name', sort: true},
+          {field: 'PickupTimeText', title: 'Pick-up Time', sort: true},  // ✅ 新增列
+          { title: 'Actions', align: 'center', fixed: 'right', toolbar: '#actionsToolbar' }
         ]],
+        
         done: function (res, curr, count) {
             if (count === 0) {
                 $(".layui-table-main").html('<div class="layui-none">No Record</div>');
@@ -218,9 +255,10 @@ defaultToolbar: [
                           const headerMap = {
                             StudentName: "Student Name",
                             TargetDate: "Date",
-                            DayOfWeek: "Day of Week"
+                            DayOfWeek: "Day of Week",
+                            PickupTimeText: "Pick-up Time" // ✅ 新增字段
                           };
-            
+                          
                           const renamed = cleaned.map((row, rowIndex) => {
                             const newRow = {};
                             console.log(`👉 原始第${rowIndex+1}行:`, row);
@@ -331,8 +369,10 @@ defaultToolbar: [
                           const headerMap = {
                             StudentName: "Student Name",
                             TargetDate: "Date",
-                            DayOfWeek: "Day of Week"
+                            DayOfWeek: "Day of Week",
+                            PickupTimeText: "Pick-up Time" // ✅ 新增字段
                           };
+                          
             
                           const renamed = cleaned.map((row, rowIndex) => {
                             const newRow = {};

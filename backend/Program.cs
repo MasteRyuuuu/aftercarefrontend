@@ -19,6 +19,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseStaticFiles();
 // ✅ 使用 Swagger
 if (app.Environment.IsDevelopment() || app.Environment.IsProduction())
 {

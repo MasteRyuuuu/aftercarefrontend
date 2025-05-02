@@ -11,5 +11,6 @@ namespace backend.Models
         public DateTime? EffectiveTo { get; set; }
         public DateTime CreatedAt { get; set; }
         public int State { get; set; } = 1;  // 默认有效
+        public int PickupTimeType { get; set; } = 1;
     }
 }

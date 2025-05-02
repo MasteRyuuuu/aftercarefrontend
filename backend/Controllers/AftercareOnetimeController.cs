@@ -25,7 +25,7 @@ public class AftercareOnetimeController : ControllerBase
         using var connection = new SqlConnection(_connectionString);
         await connection.ExecuteAsync(
             "sp_create_aftercare_onetime",
-            new { onetime.StudentName, onetime.AftercareDate },
+            new { onetime.StudentName, onetime.AftercareDate, onetime.PickupTimeType },
             commandType: CommandType.StoredProcedure);
         return Ok();
     }

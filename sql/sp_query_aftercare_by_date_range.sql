@@ -14,37 +14,51 @@ BEGIN
         StudentName NVARCHAR(100),
         TargetDate DATE,
         DayOfWeek NVARCHAR(10),
-        DayOfWeekNumber INT
+        DayOfWeekNumber INT,
+        SourceType INT,       -- 0=rules, 1=onetime
+        SourceId INT,         -- rule_id or onetime_id
+        PickupTimeType TINYINT
     );
 
     DECLARE @CurrentDate DATE = @StartDate;
 
     WHILE @CurrentDate <= @EndDate
     BEGIN
-        INSERT INTO #AftercareResult (StudentName, TargetDate, DayOfWeek, DayOfWeekNumber)
-        SELECT student_name,
-               @CurrentDate,
-               DATENAME(WEEKDAY, @CurrentDate),
-               (DATEPART(WEEKDAY, @CurrentDate) + @@DATEFIRST - 2) % 7
+        -- Insert fixed rules
+        INSERT INTO #AftercareResult (StudentName, TargetDate, DayOfWeek, DayOfWeekNumber, SourceType, SourceId, PickupTimeType)
+        SELECT 
+            student_name,
+            @CurrentDate,
+            DATENAME(WEEKDAY, @CurrentDate),
+            (DATEPART(WEEKDAY, @CurrentDate) + @@DATEFIRST - 2) % 7,
+            0,  -- SourceType = 0 for rules
+            rule_id,
+            pickup_time_type
         FROM aftercare_rules
         WHERE rule_state = 1
           AND (effective_from <= @CurrentDate)
           AND (effective_to IS NULL OR effective_to >= @CurrentDate)
           AND day_of_week = (DATEPART(WEEKDAY, @CurrentDate) + @@DATEFIRST - 2) % 7;
 
-        INSERT INTO #AftercareResult (StudentName, TargetDate, DayOfWeek, DayOfWeekNumber)
-        SELECT student_name,
-               aftercare_date,
-               DATENAME(WEEKDAY, aftercare_date),
-               (DATEPART(WEEKDAY, aftercare_date) + @@DATEFIRST - 2) % 7
+        -- Insert one-time care
+        INSERT INTO #AftercareResult (StudentName, TargetDate, DayOfWeek, DayOfWeekNumber, SourceType, SourceId, PickupTimeType)
+        SELECT 
+            student_name,
+            aftercare_date,
+            DATENAME(WEEKDAY, aftercare_date),
+            (DATEPART(WEEKDAY, aftercare_date) + @@DATEFIRST - 2) % 7,
+            1,  -- SourceType = 1 for onetime
+            onetime_id,
+            pickup_time_type
         FROM aftercare_onetime
         WHERE rule_state = 1
           AND aftercare_date = @CurrentDate;
 
+        -- Move to next day
         SET @CurrentDate = DATEADD(DAY, 1, @CurrentDate);
     END
 
-    -- Safe mapping of sortField
+    -- Mapping for sortField
     DECLARE @RealSortField NVARCHAR(100);
 
     IF @SortField = 'TargetDate'
@@ -52,9 +66,9 @@ BEGIN
     ELSE IF @SortField = 'StudentName'
         SET @RealSortField = 'StudentName';
     ELSE IF @SortField = 'DayOfWeek'
-        SET @RealSortField = 'DayOfWeekNumber';  -- Internal switch
+        SET @RealSortField = 'DayOfWeekNumber';
     ELSE
-        SET @RealSortField = 'TargetDate'; -- Default
+        SET @RealSortField = 'TargetDate'; -- Default fallback
 
     DECLARE @OrderDirection NVARCHAR(4);
     IF @SortOrder = 'desc'
@@ -62,37 +76,41 @@ BEGIN
     ELSE
         SET @OrderDirection = 'ASC';
 
-    -- Use ROW_NUMBER() for pagination
+    -- Paginated and ordered result
     WITH OrderedData AS (
         SELECT
             StudentName,
             TargetDate,
             DayOfWeek,
-            ROW_NUMBER() OVER (ORDER BY 
-                CASE WHEN @OrderDirection = 'ASC' THEN
-                    CASE @RealSortField
-                        WHEN 'TargetDate' THEN CAST(TargetDate AS NVARCHAR)
-                        WHEN 'StudentName' THEN StudentName
-                        WHEN 'DayOfWeekNumber' THEN CAST(DayOfWeekNumber AS NVARCHAR)
+            SourceType,
+            SourceId,
+            PickupTimeType,
+            ROW_NUMBER() OVER (
+                ORDER BY 
+                    CASE 
+                        WHEN @RealSortField = 'TargetDate' THEN CONVERT(NVARCHAR, TargetDate)
+                        WHEN @RealSortField = 'StudentName' THEN StudentName
+                        WHEN @RealSortField = 'DayOfWeekNumber' THEN CONVERT(NVARCHAR, DayOfWeekNumber)
                     END
-                END ASC,
-                CASE WHEN @OrderDirection = 'DESC' THEN
-                    CASE @RealSortField
-                        WHEN 'TargetDate' THEN CAST(TargetDate AS NVARCHAR)
-                        WHEN 'StudentName' THEN StudentName
-                        WHEN 'DayOfWeekNumber' THEN CAST(DayOfWeekNumber AS NVARCHAR)
-                    END
-                END DESC
+                    COLLATE SQL_Latin1_General_CP1_CI_AS
+                    ASC
             ) AS RowNum
         FROM #AftercareResult
     )
-    SELECT StudentName, TargetDate, DayOfWeek
+    SELECT 
+        StudentName, 
+        TargetDate, 
+        DayOfWeek,
+        SourceType,
+        SourceId,
+        PickupTimeType
     FROM OrderedData
     WHERE RowNum BETWEEN (@Page - 1) * @Limit + 1 AND @Page * @Limit
     ORDER BY RowNum;
 
-    -- Return total count separately
+    -- Return total count
     SELECT COUNT(*) AS TotalCount FROM #AftercareResult;
 
+    -- Clean up
     DROP TABLE #AftercareResult;
 END

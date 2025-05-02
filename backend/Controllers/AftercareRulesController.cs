@@ -25,7 +25,7 @@ public class AftercareRulesController : ControllerBase
         using var connection = new SqlConnection(_connectionString);
         await connection.ExecuteAsync(
             "sp_create_aftercare_rule",
-            new { rule.StudentName, rule.DayOfWeek, rule.EffectiveFrom, rule.EffectiveTo },
+            new { rule.StudentName, rule.DayOfWeek, rule.EffectiveFrom, rule.EffectiveTo, rule.PickupTimeType },
             commandType: CommandType.StoredProcedure);
         return Ok();
     }

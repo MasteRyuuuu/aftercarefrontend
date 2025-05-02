@@ -1,16 +1,6 @@
 F:\preschool_aftercare\backend\publish\backend.exe
-F:\preschool_aftercare\backend\publish\publish\publish\web.config
-F:\preschool_aftercare\backend\publish\publish\web.config
 F:\preschool_aftercare\backend\publish\appsettings.Development.json
 F:\preschool_aftercare\backend\publish\appsettings.json
-F:\preschool_aftercare\backend\publish\publish\appsettings.Development.json
-F:\preschool_aftercare\backend\publish\publish\appsettings.json
-F:\preschool_aftercare\backend\publish\publish\backend.deps.json
-F:\preschool_aftercare\backend\publish\publish\backend.runtimeconfig.json
-F:\preschool_aftercare\backend\publish\publish\publish\appsettings.Development.json
-F:\preschool_aftercare\backend\publish\publish\publish\appsettings.json
-F:\preschool_aftercare\backend\publish\publish\publish\backend.deps.json
-F:\preschool_aftercare\backend\publish\publish\publish\backend.runtimeconfig.json
 F:\preschool_aftercare\backend\publish\backend.dll
 F:\preschool_aftercare\backend\publish\backend.deps.json
 F:\preschool_aftercare\backend\publish\backend.runtimeconfig.json
